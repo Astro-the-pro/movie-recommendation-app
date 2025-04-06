@@ -14,6 +14,15 @@ selected_movie_name = st.selectbox(
     'Select a movie you like:',
     movies['title'].values
 )
+combined_similarity = []
+
+for i in range(1, 7):
+    with open(f"similarity_part_{i}.pkl", "rb") as f:
+        part = pickle.load(f)
+        combined_similarity.extend(part)
+
+# Now it's the full similarity matrix again
+
 
 API_KEY = "92d940e8e1aeafc210c040464da7658c"
 
@@ -33,7 +42,7 @@ def fetch_poster_and_link(movie_id):
 # Recommendation function
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
-    distances = similarity[movie_index]
+    distances = combined_similarity[movie_index]
     movie_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]
 
     recommended_movies = []
