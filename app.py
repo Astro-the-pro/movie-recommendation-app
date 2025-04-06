@@ -5,7 +5,6 @@ import requests
 
 # Load movie data and similarity matrix
 movies = pickle.load(open('movie_list.pkl', 'rb'))
-similarity = pickle.load(open('similarity.pkl', 'rb'))
 
 # Streamlit app UI
 st.title('🎬 Hollywood Movie Recommendation System')
